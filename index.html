@@ -89,7 +89,7 @@
 					<!-- 功能按钮 -->
 					<div class="fn-btn-container">
 						<div class="fn-btn"  id="fn-btn-preview"><i><img src="img/预览.svg" alt=""></i></div>
-						<div class="fn-btn" id="fn-btn-downlaod"><i><img src="img/保存.svg" alt=""></i></div>
+						<div class="fn-btn" id="fn-btn-downlaod" ng-click="container.completeAll()><i><img src="img/保存.svg" alt=""></i></div>
 						<div class="fn-btn" id="fn-btn-reset"><i><img src="img/重置.svg" alt=""></i></div>
 					</div>
 							
@@ -102,7 +102,7 @@
 						<div class="popup">
 							<div class="popup-header">
 								<span>操作提示</span>
-								<i><img src="img/关闭.svg" alt=""></i>
+								<i id="popup-btn-close"><img src="img/关闭.svg" alt=""></i>
 							</div>
 
 							<div class="popup-content" id="popup-tip">
