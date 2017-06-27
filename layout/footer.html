@@ -1,0 +1,16 @@
+<footer class="mod-ft" id="footer" ng-controller="FooterController as footer">
+    <div class="grid">
+            <ul class="mod-ft-links">
+                <li><a href="{{ url_for('atom.xml') }}"><i class="fa fa-rss"></i></a></li>
+                <li><a href="https://github.com/{{ config.github.user }}/{{ config.github.repo }}"target="_blank"><i class="fa fa-github-alt"></i></a></li>
+            </ul>
+            <div class="mod-ft-sec mod-ft-copyright">
+                <p>Designed by Ben @<a target="_blank" href="https://github.com/mvpzx">行文过活</a></p>
+                <p>Copyright &copy; {{ footer.currentYear }}. All Rights Reserved.</p>
+            </div>
+        
+            <div style="display: none">
+                <span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span>    
+            </div>
+        </div>
+</footer>

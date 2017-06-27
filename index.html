@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>问卷调查 | Mvpzx.top</title>
+	<link rel="stylesheet" href="css/main.css">
+</head>
+<body ng-app="questionnaire">
+	<!-- 页首 -->
+	<questionnaire-header></questionnaire-header>
+	
+	<!-- 主体 -->
+	<main>
+		<p ng-controller="StepController as step">
+			<a href="####" ng-class="{true: 'step-complete'}[step.completeState[0]]">问卷调研</a> / <a href="####" ng-class="{true: 'step-complete'}[step.completeState[0]]">编辑问卷</a>
+		</p>
+	
+		<!-- ng-controller="QuestionnaireController as questionnaire" -->
+		<div class="container" ng-controller="ContainerController as container">
+			<!-- 第一步：创建空白问卷并输入标题 -->
+			<div class="step-title" ng-show="container.steps[0]">
+				<form ng-submit="container.nextStep(1)">
+					<h3>问卷标题</h3>
+					<input type="text" maxlength="17" placeholder="最多输入17个字" class="txt" required="true">
+					<br>
+					<button class="btn" id="createBtn" type="submit">创建问卷</button>
+				</form>
+			</div>
+			
+			<!-- 第二步：设计问卷 -->
+			<div class="step-design" ng-show="container.steps[1]" ng-controller="DesignController as design">
+				<div class="step-design-header">
+					<div class="steps">
+						<div class="steps-circle" ng-class="{true: 'steps-circle-active'}[design.completeState[2]]">3</div>
+						<span ng-class="{true: 'steps-span-active'}[design.completeState[2]]">保存问卷</span>
+						<div class="steps-line" ng-class="{true: 'steps-line-active'}[design.completeState[2]]"></div>
+					</div>
+					<div class="steps">
+						<div class="steps-circle"  ng-class="{true: 'steps-circle-active'}[design.completeState[1]]">2</div>
+						<span  ng-class="{true: 'steps-span-active'}[design.completeState[1]]">设计内容</span>
+						<div class="steps-line" ng-class="{true: 'steps-line-active'}[design.completeState[1]]"></div>
+					</div>
+					<div class="steps">
+						<div class="steps-circle" ng-class="{'steps-circle-active': design.completeState[0]}">1</div>
+						<span ng-class="{'steps-span-active': design.completeState[0]}">设计问卷</span>
+						<div class="steps-line" ng-class="{'steps-line-active': design.completeState[0]}"></div>
+					</div>
+				</div>
+
+				<div class="step-design-body">
+					<div class="btn-preview">
+						设计初衷用于设计问卷，但也不限于设计问卷哦！
+					</div>
+					<div class="left-aside">
+						<div class="question-types">
+							<div class="icon-row" ng-click="design.selectList(1)">
+								<span>题型选择</span>
+								<i><img src="img/down.svg" alt=""></i>
+							</div>
+
+							<ul ng-show="design.isSelected(1)">
+								<li ng-repeat="questionType in design.questionTypes" ng-click="design.addQuestion(questionType.desc)">
+									<i><img ng-src="{{'img/' + questionType.icon}}" alt=""></i>
+									<span>{{ questionType.desc }}</span>
+								</li>
+							</ul>
+						</div>
+
+						<div class="common-question">
+							<div class="icon-row" ng-click="design.selectList(2)">
+								<span>常见题型</span>
+								<i><img src="img/down.svg" alt=""></i>
+							</div>
+
+							<ul ng-show="design.isSelected(2)">
+								<li ng-repeat="questionCommon in design.commonQuestions" ng-click="design.addQuestion(questionCommon.desc)">
+									<i><img ng-src="{{'img/' + questionCommon.icon}}" alt=""></i>
+									<span>{{ questionCommon.desc }}</span>
+								</li>
+							</ul>
+						</div>
+					</div>
+					<div class="right-aside">
+						<div class="questionnaire-title" id="q-title" contenteditable="true" ng-blur="container.alterTitle()">{{ container.title }}</div>
+						<div class="questionnaire-title questionnaire-tip" id="q-tip" contenteditable="true" ng-blur="container.alterTip()">{{ container.tip }}</div>
+						<div id="questions-container"></div> 
+					</div>
+
+					<!-- 功能按钮 -->
+					<div class="fn-btn-container">
+						<div class="fn-btn"  id="fn-btn-preview"><i><img src="img/预览.svg" alt=""></i></div>
+						<div class="fn-btn" id="fn-btn-downlaod"><i><img src="img/保存.svg" alt=""></i></div>
+						<div class="fn-btn" id="fn-btn-reset"><i><img src="img/重置.svg" alt=""></i></div>
+					</div>
+							
+					
+					<!-- 弹窗 -->
+					<div id="layout-cover-container">
+						<div class="layout-cover">
+						</div>
+
+						<div class="popup">
+							<div class="popup-header">
+								<span>操作提示</span>
+								<i><img src="img/关闭.svg" alt=""></i>
+							</div>
+
+							<div class="popup-content" id="popup-tip">
+							</div>
+
+							<div class="popup-footer">
+								<button class="btn btn-success" id="popup-confirm-btn">确认</button>
+								<button class="btn btn-fail" id="popup-cancel-btn">取消</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</main>
+	<!-- 预览窗口 -->
+	<div id="preview-container">
+		<div class="layout-cover"></div>
+		<div id="canvas-container">	
+			<div id="fn-btn-return" class="pull-right">
+				<i><img src="img/返回.svg" alt=""></i>
+			</div>
+		</div>
+	</div>
+	<!-- 页脚 -->
+	<questionnaire-footer></questionnaire-footer>
+	<script src="js/jquery.js"></script>
+	<script src="js/angular.min.js"></script>
+	<script src="https://cdn.bootcss.com/html2canvas/0.5.0-beta4/html2canvas.js"></script>
+	<script src="https://cdn.bootcss.com/jspdf/1.3.4/jspdf.debug.js"></script>
+	<script src="js/app.js"></script>	
+	<script src="js/topdf.js"></script>	
+</body>
+</html>
