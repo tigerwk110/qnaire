@@ -64,9 +64,6 @@ function recoverPDFCss() {
       rBtn[i].style.display = "block";
     }
 
-
-   
-
     //修改每个问题的标题的样式
     var qTitle = document.getElementsByClassName("sub-questions-title");
     for (var i = 0; i < qTitle.length; i++) {
@@ -146,6 +143,8 @@ function reEditPDF() {
 
 //为按钮绑定事件
 function bindEvent(target, events) {
+  target.unbind();
+
   target.one("click", function () { //注意只绑定一次就要解除这个事件
     closePopup();
     events();
@@ -157,14 +156,18 @@ $("#popup-cancel-btn").on("click", function () {
   closePopup();
 });
 
+//弹窗右上角的关闭按钮
+$("#popup-btn-close").on("click", function () {
+  closePopup();
+});
 
 /*
  * content: 传入弹窗的提示信息
- * type: 事件类型：0-预览PDF， 1-保存PDF，其他-重做PDF
+ * type: 事件类型：0-预览PDF， 1-保存PDF
  */
 function Popup(content, type) {
   this.content = content;
-  this.type = type || 0;
+  this.type = type;
 
   this.rendarTipData();
   this.confirmEvent();
