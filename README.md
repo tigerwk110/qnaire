@@ -1,4 +1,4 @@
-# 问卷在线设计平台 2.0
+# 问卷在线设计平台
 > 链接：<a href="http://mvpzx.top/demo/qnaire/index.html" target="_blank">点击前往</a>
 
 ## 新增功能
