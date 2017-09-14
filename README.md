@@ -2,7 +2,7 @@
 
 闲着无聊，尝试用angular.js做了一个在线的问卷设计网页，遇到了一些关于jsPdf的坑，在此做个整理。
 (PS: 网页写的垃圾，我也不想看了，别喷)
-> 链接：<a href="http://mvpzx.top/online/qnaire/index.html" target="_blank">点击前往</a>
+> 问卷在线设计网页：<a href="http://mvpzx.top/online/qnaire/index.html" target="_blank">点击前往</a>
 
 ## 其他
 
